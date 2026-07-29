@@ -1,0 +1,441 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+:root {
+  color: #231b17;
+  background: #f5ecd8;
+  font-family: "Comic Sans MS", "Bradley Hand", "Segoe Print", cursive, sans-serif;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100dvh;
+  height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(161, 94, 59, 0.12) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(rgba(75, 98, 128, 0.12) 1px, transparent 1px) 0 0 / 100% 32px,
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 34rem),
+    #f5ecd8;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+.app-shell {
+  width: min(100%, 1100px);
+  min-height: 100dvh;
+  height: 100dvh;
+  margin: 0 auto;
+  padding: clamp(0.35rem, 1.8vmin, 1.25rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.game-card {
+  position: relative;
+  width: 100%;
+  max-height: calc(100dvh - clamp(0.7rem, 3.6vmin, 2.5rem));
+  padding: clamp(0.55rem, 1.8vmin, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.35rem, 1.5vmin, 1.15rem);
+  overflow: hidden;
+  background: rgba(255, 252, 242, 0.82);
+  border: 4px solid #231b17;
+  border-radius: 30px 18px 36px 20px;
+  box-shadow: 12px 14px 0 rgba(35, 27, 23, 0.16);
+  transform: rotate(-0.25deg);
+}
+
+.game-header {
+  max-width: 680px;
+  text-align: center;
+  transform: rotate(0.25deg);
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: clamp(0.7rem, min(2.2vw, 2dvh), 1rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a4b2f;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, min(7vw, 6dvh), 4.5rem);
+  line-height: 0.95;
+  text-shadow: 2px 3px 0 rgba(138, 75, 47, 0.22);
+}
+
+.game-header p:last-child {
+  margin: clamp(0.25rem, 1vmin, 0.75rem) auto 0;
+  font-size: clamp(0.8rem, min(2.4vw, 2.2dvh), 1.2rem);
+}
+
+.setup-card {
+  max-width: 760px;
+}
+
+.setup-form {
+  width: min(100%, 620px);
+  display: grid;
+  gap: clamp(0.45rem, 1.5vmin, 1rem);
+}
+
+.name-field {
+  display: grid;
+  gap: 0.35rem;
+  font-size: clamp(0.9rem, min(2.6vw, 2.4dvh), 1.2rem);
+  font-weight: 700;
+}
+
+.name-field input {
+  width: 100%;
+  padding: clamp(0.45rem, 1.3vmin, 0.8rem) clamp(0.75rem, 2vmin, 1rem);
+  border: 3px solid #231b17;
+  border-radius: 18px 14px 20px 12px;
+  outline: none;
+  background: #fffaf0;
+  box-shadow: 4px 5px 0 rgba(35, 27, 23, 0.14);
+  font-size: clamp(0.95rem, min(3vw, 2.8dvh), 1.25rem);
+}
+
+.name-field input:focus {
+  border-color: #8a4b2f;
+}
+
+.category-panel {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.category-panel p {
+  margin: 0;
+  font-size: clamp(0.85rem, min(2.4vw, 2.2dvh), 1.1rem);
+  font-weight: 700;
+}
+
+.category-list,
+.setup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.35rem, 1vmin, 0.65rem);
+}
+
+.choice-button,
+.primary-action,
+.secondary-action,
+.back-link {
+  border: 3px solid #231b17;
+  border-radius: 19px 14px 22px 13px;
+  background: #fffaf0;
+  box-shadow: 3px 4px 0 rgba(35, 27, 23, 0.16);
+  cursor: pointer;
+  font-weight: 800;
+  transform: rotate(-0.5deg);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+
+.choice-button {
+  padding: clamp(0.3rem, 1vmin, 0.6rem) clamp(0.55rem, 1.8vmin, 0.9rem);
+  font-size: clamp(0.8rem, min(2.4vw, 2.1dvh), 1rem);
+}
+
+.choice-button.selected,
+.primary-action {
+  background: #4f9ecf;
+  color: white;
+}
+
+.primary-action,
+.secondary-action {
+  padding: clamp(0.45rem, 1.3vmin, 0.75rem) clamp(0.65rem, 2vmin, 1rem);
+  font-size: clamp(0.85rem, min(2.5vw, 2.3dvh), 1rem);
+}
+
+.back-link {
+  position: absolute;
+  top: clamp(0.45rem, 1.6vmin, 1rem);
+  left: clamp(0.45rem, 1.6vmin, 1rem);
+  width: clamp(2rem, 6vmin, 2.8rem);
+  height: clamp(2rem, 6vmin, 2.8rem);
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: #fffaf0;
+  border-radius: 50% 45% 55% 48%;
+  font-size: clamp(1.1rem, min(4vw, 3.5dvh), 1.6rem);
+  line-height: 1;
+  z-index: 1;
+}
+
+.secondary-action {
+  background: #ffe08a;
+}
+
+.choice-button:hover,
+.choice-button:focus,
+.primary-action:hover:not(:disabled),
+.primary-action:focus:not(:disabled),
+.secondary-action:hover,
+.secondary-action:focus,
+.back-link:hover,
+.back-link:focus {
+  box-shadow: 2px 2px 0 rgba(35, 27, 23, 0.2);
+  transform: translateY(2px) rotate(0deg);
+}
+
+.primary-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.status-message {
+  min-height: clamp(1.2rem, 4dvh, 2rem);
+  padding: 0 1rem;
+  font-size: clamp(0.95rem, min(3.5vw, 3.4dvh), 2rem);
+  font-weight: 700;
+  text-align: center;
+  color: #8a2f22;
+  transform: rotate(-1deg);
+  opacity: 0;
+}
+
+.status-message.visible {
+  opacity: 1;
+}
+
+.drawing-frame {
+  --line: #231b17;
+  --drawing-height: clamp(135px, 31dvh, 330px);
+  position: relative;
+  width: min(calc(var(--drawing-height) * 0.68), 72vw);
+  height: var(--drawing-height);
+  flex: 0 0 auto;
+  transform: rotate(1deg);
+}
+
+.scaffold,
+.hangman-part {
+  position: absolute;
+  background: var(--line);
+  border-radius: 999px 85px 999px 90px;
+  box-shadow: 2px 2px 0 rgba(35, 27, 23, 0.2);
+}
+
+.scaffold-top {
+  top: 0;
+  left: 38%;
+  width: 56%;
+  height: 2.4%;
+  transform: rotate(-1deg);
+}
+
+.scaffold-rope {
+  top: 0;
+  right: 3%;
+  width: 3%;
+  height: 12%;
+  transform: rotate(1deg);
+}
+
+.scaffold-post {
+  top: 0;
+  left: 38%;
+  width: 3%;
+  height: 86%;
+  transform: rotate(0.5deg);
+}
+
+.scaffold-base {
+  bottom: 0;
+  left: 0;
+  width: 78%;
+  height: 2.4%;
+  transform: rotate(0.8deg);
+}
+
+.hangman-head {
+  top: 11%;
+  right: -6%;
+  width: 19%;
+  aspect-ratio: 1;
+  background: transparent;
+  border: clamp(4px, 1.15vmin, 10px) solid var(--line);
+  border-radius: 48% 55% 46% 53%;
+}
+
+.hangman-body {
+  top: 27%;
+  right: 4%;
+  width: 3%;
+  height: 23%;
+}
+
+.hangman-left-arm,
+.hangman-right-arm,
+.hangman-left-leg,
+.hangman-right-leg {
+  width: 30%;
+  height: 2.4%;
+}
+
+.hangman-left-arm {
+  top: 34%;
+  right: 7%;
+  transform: rotate(31deg);
+  transform-origin: right bottom;
+}
+
+.hangman-right-arm {
+  top: 34%;
+  right: -24%;
+  transform: rotate(-31deg);
+  transform-origin: left bottom;
+}
+
+.hangman-left-leg {
+  top: 49%;
+  right: 4%;
+  transform: rotate(-60deg);
+  transform-origin: right bottom;
+}
+
+.hangman-right-leg {
+  top: 49%;
+  right: -22%;
+  transform: rotate(60deg);
+  transform-origin: left bottom;
+}
+
+.word-display {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.12rem, 0.9vmin, 0.55rem);
+  font-size: clamp(1.45rem, min(9vw, 6dvh), 5.25rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.word-letter {
+  min-width: 0.75em;
+  display: inline-flex;
+  justify-content: center;
+  border-bottom: clamp(3px, 0.8vmin, 8px) solid #231b17;
+  border-radius: 0 0 42% 55%;
+  transform: rotate(var(--tilt, -1deg));
+}
+
+.word-letter:nth-child(even) {
+  --tilt: 1deg;
+}
+
+.missed-letter {
+  color: #b83224;
+}
+
+.hint-card {
+  width: min(100%, 620px);
+  min-height: clamp(1.3rem, 4dvh, 2.25rem);
+  padding: clamp(0.25rem, 1vmin, 0.55rem) clamp(0.6rem, 1.6vmin, 1rem);
+  border: 2px dashed rgba(35, 27, 23, 0.7);
+  border-radius: 18px 12px 21px 14px;
+  background: rgba(255, 224, 138, 0.42);
+  font-size: clamp(0.8rem, min(2.4vw, 2.2dvh), 1.05rem);
+  text-align: center;
+  opacity: 0.65;
+  transform: rotate(0.4deg);
+}
+
+.hint-card.visible {
+  opacity: 1;
+}
+
+.keyboard-wrap {
+  width: 100%;
+}
+
+@media (max-width: 620px) {
+  .game-card {
+    border-width: 3px;
+    border-radius: 22px 14px 24px 16px;
+    box-shadow: 7px 8px 0 rgba(35, 27, 23, 0.16);
+  }
+
+  .drawing-frame {
+    --drawing-height: clamp(125px, 29dvh, 240px);
+  }
+}
+
+@media (max-height: 680px) {
+  .game-header p:last-child {
+    display: none;
+  }
+
+  .status-message {
+    min-height: 1.1rem;
+  }
+
+  .setup-form {
+    gap: 0.35rem;
+  }
+
+  .hint-card {
+    padding-block: 0.15rem;
+  }
+}
+
+@media (max-height: 540px) {
+  .eyebrow {
+    display: none;
+  }
+
+  .game-card {
+    gap: 0.25rem;
+    padding: 0.4rem;
+  }
+
+  .drawing-frame {
+    --drawing-height: 28dvh;
+  }
+
+  .category-list {
+    gap: 0.25rem;
+  }
+
+  .choice-button,
+  .primary-action,
+  .secondary-action,
+  .back-link {
+    border-width: 2px;
+    box-shadow: 2px 2px 0 rgba(35, 27, 23, 0.14);
+  }
+}

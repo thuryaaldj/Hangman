@@ -1,25 +1,67 @@
-.btn{
-    width:100%;
-    border:3px solid black;
-    background: none;
-    aspect-ratio: 1/1;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    padding: .5rem;
-    font-weight: bold ;
-    cursor: pointer;
-    color: black;
+.keyboard {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(1.75rem, 6.5vmin, 4.35rem), 1fr));
+  gap: clamp(0.22rem, 0.9vmin, 0.6rem);
 }
 
-.btn.active{
-    background-color: hsl(200,100%,50%);
-    color:white;
+.btn {
+  width: 100%;
+  border: clamp(2px, 0.5vmin, 3px) solid #231b17;
+  border-radius: 45% 55% 44% 56% / 56% 42% 58% 44%;
+  background: #fffaf0;
+  aspect-ratio: 1/1;
+  font-size: clamp(1rem, 4.5vmin, 2.25rem);
+  text-transform: uppercase;
+  padding: clamp(0.15rem, 1vmin, 0.5rem);
+  font-weight: bold;
+  cursor: pointer;
+  color: #231b17;
+  box-shadow: 3px 4px 0 rgba(35, 27, 23, 0.18);
+  transform: rotate(-1deg);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
 }
-.btn.active{
-    opacity: .3;
+
+.btn:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.btn.active {
+  background-color: #4f9ecf;
+  color: white;
+}
+
+.btn.inactive {
+  background-color: #d9c9b2;
+  color: #7c251c;
+  opacity: 0.3;
 }
 
 .btn:hover:not(:disabled),
-.btn:focus:not(:disabled){
-    background-color: hsl(200,100%,75%);
+.btn:focus:not(:disabled) {
+  background-color: #ffe08a;
+  box-shadow: 2px 3px 0 rgba(35, 27, 23, 0.22);
+  transform: translateY(2px) rotate(0deg);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .keyboard {
+    grid-template-columns: repeat(auto-fit, minmax(1.85rem, 1fr));
+  }
+}
+
+@media (max-height: 540px) {
+  .keyboard {
+    grid-template-columns: repeat(auto-fit, minmax(1.45rem, 1fr));
+    gap: 0.18rem;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    box-shadow: 2px 2px 0 rgba(35, 27, 23, 0.18);
+  }
 }

@@ -1,123 +1,56 @@
 const HEAD = (
-    <div
-    style={{ 
-        height:"50px",
-        width:"50px",
-        borderRadius:"100%",
-        border:"10px solid black",
-        position:"absolute",
-        top:"50px",
-        right:"-30px"
-    }}
-    />
+  <div
+    key="head"
+    className="hangman-part hangman-head"
+  />
 )
 const BODY = (
-    <div
-    style={{ 
-        height:"100px",
-        width:"10px",
-        position:"absolute",
-        background:"black",
-        top:"120px",
-        right:"0px" 
-    }}
-    />
+  <div
+    key="body"
+    className="hangman-part hangman-body"
+  />
 )
 const RIGHT_ARM = (
-    <div
-    style={{ 
-        height:"10px",
-        width:"100px",
-        background:"black",
-        position:"absolute",
-        top:"150px",
-        right:"-100px" ,
-        rotate:"-30deg",
-        transformOrigin:"left bottom",
-    }}
-    />
+  <div
+    key="right-arm"
+    className="hangman-part hangman-right-arm"
+  />
 )
 const LEFT_ARM = (
-    <div
-    style={{ 
-        width:"100px",
-        height:"10px",
-        background:"black",
-        position:"absolute",
-        top:"150px",
-        right:"10px" ,
-        rotate:"30deg",
-        transformOrigin:"right bottom",
-    }}
-    />
+  <div
+    key="left-arm"
+    className="hangman-part hangman-left-arm"
+  />
 )
 
 const RIGHT_LEG = (
-    <div
-    style={{ 
-        width:"100px",
-        height:"10px",
-        background:"black",
-        position:"absolute",
-        top:"210px",
-        right:"-90px" ,
-        rotate:"60deg",
-        transformOrigin:"left bottom",
-    }}
-    />
+  <div
+    key="right-leg"
+    className="hangman-part hangman-right-leg"
+  />
 )
 
 const LEFT_LEG = (
-    <div
-    style={{ 
-        width:"100px",
-        height:"10px",
-        background:"black",
-        position:"absolute",
-        top:"210px",
-        right:"0px" ,
-        rotate:"-60deg",
-        transformOrigin:"right bottom",
-    }}
-    />
+  <div
+    key="left-leg"
+    className="hangman-part hangman-left-leg"
+  />
 )
 
-const BODY_PART =[ HEAD , BODY , LEFT_ARM , RIGHT_ARM , LEFT_LEG , RIGHT_LEG ]
+const BODY_PART = [HEAD, BODY, LEFT_ARM, RIGHT_ARM, LEFT_LEG, RIGHT_LEG]
 
-type HangmanDrawingProps ={
-    numberOfGuesses:number
+type HangmanDrawingProps = {
+  numberOfGuesses: number
 }
-export function HangmanDrawing( {numberOfGuesses}:HangmanDrawingProps) {
-    return (
-<div style={{ position:"relative" }}>
-{BODY_PART.slice(0,numberOfGuesses)}
-    <div
-    style={{ 
-        height:"50px",
-        width:"10px",
-        background:"black",
-        position:"absolute",
-        top:0,
-        right:0
-    }}
-    />
-    <div
-    style={{ 
-        height:"10px",
-        width:"200px",
-        background:"black",
-        marginLeft:"120px"
-    }}
-    />
-    <div
-    style={{ 
-        height:"400px",
-        width:"10px",
-        background:"black",
-        marginLeft:"120px"
-    }}
-    />
-    <div style={{ height:"10px",width:"250px",background:"black" }}/>
-</div>
-    )
+
+export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
+  return (
+    <div className="drawing-frame">
+      {BODY_PART.slice(0, numberOfGuesses)}
+      <div className="scaffold scaffold-rope" />
+      <div className="scaffold scaffold-top" />
+      <div className="scaffold scaffold-post" />
+      <div className="scaffold scaffold-base" />
+    </div>
+  )
 }
