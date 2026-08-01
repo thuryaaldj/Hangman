@@ -111,7 +111,7 @@ function App() {
   }, [addGuessedLetter, hasStarted])
 
   useEffect(() => {
-    if (!hasStarted) return
+    if (!hasStarted || (!isWinner && !isLoser)) return
 
     const handler = (e: KeyboardEvent) => {
       if (e.key !== "Enter") return
@@ -120,12 +120,12 @@ function App() {
       startNewGame()
     }
 
-    document.addEventListener("keypress", handler)
+    document.addEventListener("keydown", handler)
 
     return () => {
-      document.removeEventListener("keypress", handler)
+      document.removeEventListener("keydown", handler)
     }
-  }, [hasStarted, startNewGame])
+  }, [hasStarted, isWinner, isLoser, startNewGame])
 
   if (!hasStarted) {
     if (setupStep === "name") {
@@ -243,8 +243,12 @@ function App() {
           <h1>Guess the Word</h1>
           <p>
             {playerName ? `Good luck, ${playerName}! ` : "Good luck! "}
-            Category:{" "}
-            {selectedCategory === ALL_CATEGORIES ? "Mixed" : currentWord.category}
+            {/* Category:{" "}
+            {selectedCategory === ALL_CATEGORIES ? "Mixed" : currentWord.category} */}
+          </p>
+          <p>
+          Category:{" "}
+          {selectedCategory === ALL_CATEGORIES ? "Mixed" : currentWord.category}
           </p>
         </div>
 
@@ -257,9 +261,33 @@ function App() {
           &larr;
         </button>
 
+        {(isWinner || isLoser) && (
+          <button
+            aria-label="Try again"
+            className="try-again-button"
+            onClick={startNewGame}
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              width="1em"
+              height="1em"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+              <polyline points="21 3 21 9 15 9" />
+            </svg>
+          </button>
+        )}
+
         <div className={`status-message ${isWinner || isLoser ? "visible" : ""}`}>
-          {isWinner && "Winner! - Press Enter to try again"}
-          {isLoser && "Nice try! - Press Enter to try again"}
+          {isWinner && "Winner!"}
+          {isLoser && "Nice try!"}
         </div>
 
         <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
